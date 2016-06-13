@@ -1,0 +1,13 @@
+ABOUT:
+
+The nouveGnome icon theme is made by Pedram Pourang (aka Tsu Jan) in May 2010. It is NOT a complete icon set but depends on GNOME Desktop icon theme, which is provided by the package gnome-icon-theme in the Debian-based systems.
+
+nouveGnome is inspired by A. Moore's nuoveXT and uses some of its icons. nuoveXT can be downloaded from:
+
+	http://nuovext.pwsp.net/
+
+The neat folder icon of GNOME-Colors is used in modified forms. The project home of GNOME-Colors is here:
+
+	http://code.google.com/p/gnome-colors/
+
+Some other icons are made by editing or mixing GNOME and KDE project icons, which can be found in Debian and Ubuntu repositories.

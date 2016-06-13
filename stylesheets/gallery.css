@@ -1,0 +1,393 @@
+@import "/even-fancier-index/fonts/droid-sans.css";
+
+
+footer {
+    clear: both;
+}
+
+body {
+    padding: 40px 302px 60px 20px;
+    background-color: #444;
+    left: 0;
+    right: 282px;
+}
+
+div, p, span, a, h1 {
+    font-family: 'Droid Sans', Sans, tahoma, verdana;
+    font-size: 12pt;
+    line-height: 120%;
+}
+
+.videos {
+    clear: both;
+    padding-top: 50px;
+
+}
+
+.videos .metadata,
+.videos h2 {
+    margin: 1em 3em;
+    text-shadow: 0px 0px 3px rgba(255, 255, 255, 1);
+}
+
+
+a,
+h1 {
+    text-decoration: none;
+    color: white;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
+}
+
+h1 {
+    font-size: 14pt;
+    padding: 0 0 4px 4px;
+    margin: 32px 0 8px 0;
+    border-bottom: 1px solid #666;
+}
+
+
+#actions,
+#settings {
+    position: fixed;
+    width: 250px;
+    top: 40px;
+    bottom: 0px;
+    right: 0px;
+    padding: 0px 16px 0 16px;
+    
+    background-color: #eee;
+    z-index: 998;
+
+    margin: 0;
+  
+    -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 1);
+    -moz-box-shadow:    0px 0px 8px rgba(0, 0, 0, 1);
+    box-shadow:         0px 0px 8px rgba(0, 0, 0, 1);
+}
+
+#settings {
+    width: 250px;
+    right: 280px;
+}
+
+#actions a,
+#settings a {
+    text-decoration: none;
+    color: black;
+    text-shadow: 0px 0px 5px rgba(255, 255, 255, 1);
+}
+
+#actions h1,
+#settings h1 {
+    color: black;
+    text-shadow: 0px 0px 5px rgba(255, 255, 255, 1);
+    border-bottom: 1px solid #ccc;
+}
+
+.lazy {
+}
+
+#videos,
+#tracks,
+#directories,
+#gallery,
+#otherFiles {
+    padding: 0;
+    margin: 0 8px;
+    clear: both;
+}
+
+#directories .items,
+#tracks .items,
+#otherFiles .items{
+    display: block;
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+
+}
+
+
+#directories .directory,
+#tracks .track,
+#otherFiles .otherFile {
+
+    background-repeat:no-repeat;
+    background-position: 2px 4px;
+    background-size: 48px;
+    font-size: 16px;
+    line-height: 54px;
+    text-overflow: ellipsis;
+    padding-left: 54px;
+    display: block;
+    cursor: inherit;
+    white-space: nowrap;
+    overflow: hidden;
+    border: 1px solid transparent;
+}
+
+#directories .directory:hover,
+#tracks .track:hover,
+#otherFiles .otherFile:hover,
+#thumbnail:hover {
+    background-color: #223;
+    border: 1px solid #668;
+}
+
+
+#directories .directory {
+    background-image: url('/even-fancier-index/themes/nouveGnome/48x48/places/folder.png');
+}
+
+.thumbnail {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    display: inline-block;
+    border: 1px solid transparent;
+    margin: 2px;
+}
+
+.thumbnail:hover img {
+    -webkit-box-shadow: none;
+    -moz-box-shadow:    none;
+    box-shadow:         none;
+}
+
+.thumbnail p {
+    position: absolute;
+    left: 30px;
+    bottom: 6px;
+    height: 20px;
+    right: 30px;
+    text-align: center;
+    width: 240px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.thumbnail img,
+.thumbnail object {
+    max-width: 256px;
+    max-height: 256px;
+    position: absolute;
+    left: 22px;
+    top: 6px;
+    bottom: 38px;
+    right: 22px;
+    margin: auto;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.thumbnail.jpeg img {
+    -webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 1);
+    -moz-box-shadow:    0px 0px 12px rgba(0, 0, 0, 1);
+    box-shadow:         0px 0px 12px rgba(0, 0, 0, 1);
+    background-color: white;
+}
+
+/*
+.thumbnail img {
+    transform: rotate(2deg);
+    -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+    transition: all .0.5s ease-in-out;    
+    -webkit-transition: all .0.5s ease-in-out;
+    -moz-transition: all .0.5s ease-in-out;
+}
+
+.thumbnail:nth-child(2n) img {
+    transform: rotate(5deg);
+    -webkit-transform: rotate(5deg);
+    -moz-transform: rotate(5deg);
+}
+.thumbnail:nth-child(3n) img {
+    transform: rotate(-5deg);
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+}
+
+.thumbnail:nth-child(5n) img {
+    transform: translate(0,-5px);
+    -webkit-transform: translate(0,-5px);
+    -moz-transform: translate(0,-5px);
+}
+
+.thumbnail:nth-child(7n) img {
+    transform: translate(0,5px);
+    -webkit-transform: translate(0,5px);
+    -moz-transform: translate(0,5px);
+}
+*/
+
+.action.xspf {
+    background-image: url("/even-fancier-index/themes/nouveGnome/24x24/apps/vlc.png");
+}
+
+.action.play.audio,
+.action.watch.video {
+    background-image: url("/even-fancier-index/themes/nouveGnome/24x24/actions/media-playback-start.png");
+}
+
+button.play {
+    background-image: url("/even-fancier-index/themes/nouveGnome/32x32/actions/media-playback-start.png");
+}
+
+button.pause {
+    background-image: url("/even-fancier-index/themes/nouveGnome/32x32/actions/media-playback-pause.png");
+}
+
+button.stop {
+    background-image: url("/even-fancier-index/themes/nouveGnome/32x32/actions/media-playback-stop.png");
+}
+
+button.previous {
+    background-image: url("/even-fancier-index/themes/nouveGnome/32x32/actions/media-skip-backward.png");
+}
+
+
+button.next {
+    background-image: url("/even-fancier-index/themes/nouveGnome/32x32/actions/media-skip-forward.png");
+}
+
+
+
+
+.action.wget, .action.download {
+    background-image: url("/even-fancier-index/themes/nouveGnome/24x24/places/folder-download.png");
+}
+
+
+.action.screen {
+    background-image: url("/even-fancier-index/themes/nouveGnome/24x24/devices/display.png");
+}
+
+.action.toggle.settings {
+    background-image: url("/even-fancier-index/themes/nouveGnome/24x24/categories/gnome-settings.png");
+}
+
+
+
+.action {
+    background-repeat:no-repeat;
+    background-position: 0px 8px;
+    background-size: 24px;
+    font-size: 16px;
+    height: 24px;
+    margin: 0;
+    padding: 12px 12px 0 32px;
+    text-overflow: ellipsis;
+    max-width: 15em;
+    display: block;
+    cursor: inherit;
+    line-height: 100%;
+}
+
+
+#audio_player_controls {
+    display: none;
+    background-color: #eee;
+    position: fixed;
+    z-index: 997;
+    left: 0;
+    right: 280px;
+    bottom: 0;
+    height: 56px;
+    -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 1);
+    -moz-box-shadow:    0px 0px 8px rgba(0, 0, 0, 1);
+    box-shadow:         0px 0px 8px rgba(0, 0, 0, 1);
+}
+
+#audio_player_controls .duration,
+#audio_player_controls .offset {
+    position: absolute;
+    line-height: 32px;
+    font-family: monospace;
+    font-size: 10px;
+    padding: 0 4px;
+}
+
+#audio_player_controls .offset {
+    left: 0px;
+    width: 100px;
+}
+
+#audio_player_controls .duration {
+    right: 0;
+    width: 100px;
+    text-align: right;
+}
+
+#audio_player_controls .seek {
+    position: absolute;
+    left: 100px;
+    right: 100px;
+}
+
+#audio_player_controls .seek input {
+    width: 100%;
+}
+
+
+
+#audio_player_controls .buttons {
+    position: absolute;
+    margin: 8px 4px;
+    left: 0;
+    width: 170px;
+}
+
+#audio_player_controls .top {
+    position: absolute;
+    margin: 4px;
+    left: 170px;
+    right: 0;
+    top: 0;
+    text-align: center;
+    font-style: italic;
+}
+
+#audio_player_controls .remainder {
+    position: absolute;
+    margin: 4px;
+    left: 170px;
+    right: 0;
+    top: 16px;
+}
+
+#audio_player_controls .remainder .codec {
+    float: right;
+}
+
+#audio_player_controls button {
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    background-position: 4px 4px;
+    background-size: 32px;
+    display: inline;
+    border-width: 1px 1px 1px 0;
+    border-style: solid;
+    border-color: #aaa;
+}
+
+#audio_player_controls button:first-child {
+    border-width: 1px;
+    -webkit-border-radius: 4px 0 0 4px;
+    -moz-border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px;
+}
+
+#audio_player_controls button:last-child {
+    -webkit-border-radius: 0 4px 4px 0;
+    -moz-border-radius: 0 4px 4px 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.busy {
+    cursor: wait !important;
+}
+

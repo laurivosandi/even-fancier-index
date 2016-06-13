@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg3172"
+   height="22"
+   width="18"
+   version="1.0"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="account-logged-in.svg">
+  <defs
+     id="defs9">
+    <filter
+       inkscape:collect="always"
+       id="filter3756">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.279998"
+         id="feGaussianBlur3758" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="855"
+     inkscape:window-height="480"
+     id="namedview7"
+     showgrid="false"
+     inkscape:zoom="10.727273"
+     inkscape:cx="-20.830509"
+     inkscape:cy="11"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg3172" />
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     id="path2396"
+     d="m9 3.9992c-3.864 0-7 3.136-7 6.9998 0 3.864 3.136 7 7 7s7-3.136 7-7c0-3.8638-3.136-6.9998-7-6.9998zm3 2 2 2l-5.5 7.4998-4-3.5 2-1.9998 2 1.9998 3.5-5.9998z"
+     style="fill:#969696;fill-opacity:1" />
+  <path
+     id="path3170"
+     d="m4.8544 11.999 1.6456-1.645 2.0545 2.054 3.5005-5.9998 1.618 1.6183-5.2003 7.1185-3.6183-3.146z"
+     style="opacity:.3;stroke:#fff;stroke-width:.5;fill:none" />
+</svg>

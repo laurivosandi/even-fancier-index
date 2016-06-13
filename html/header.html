@@ -1,0 +1,262 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="/even-fancier-index/stylesheets/reset.css">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="/even-fancier-index/stylesheets/jquery.fancybox.css" media="screen" />
+    <script type="text/javascript" src="/even-fancier-index/js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/even-fancier-index/js/jquery.fancybox-2.1.5.min.js"></script>
+    <script type="text/javascript" src="/even-fancier-index/js/jquery.mousewheel.min.js"></script>
+    <script type="text/javascript" src="/even-fancier-index/js/qrcode.js"></script>
+    <script type="text/javascript" src="/even-fancier-index/js/jquery.qrcode.js"></script>
+    <script type="text/javascript" src="/even-fancier-index/js/jquery.unveil.min.js"></script>
+    <script type="text/javascript" src="/even-fancier-index/config/mimetypes.js"></script>
+    <script type="text/javascript" src="/even-fancier-index/config/themes.js"></script>
+    <script type="text/javascript" src="/even-fancier-index/js/common.js"></script>
+    <script type="text/javascript" src="/even-fancier-index/js/sprintf.js"></script>
+    <script type="text/javascript" src="/even-fancier-index/js/bus.js"></script>
+    <script type="text/javascript" src="/even-fancier-index/js/moarplayer.js"></script>
+    <script type="text/javascript" src="/even-fancier-index/js/moarcloud.js"></script>
+    <script type="text/javascript" src="/even-fancier-index/js/moarcloud-l10n.js"></script>
+    <script type="text/javascript" src="/even-fancier-index/js/moarcloud-l10n-et.js"></script>
+    <link rel="stylesheet" type="text/css" href="/even-fancier-index/stylesheets/breadcrumbs.css">
+    <link rel="stylesheet" type="text/css" href="/even-fancier-index/stylesheets/gallery.css">
+    <style type="text/css">
+    
+
+    #list {
+        display: none;
+        border-collapse:collapse;
+    }
+    
+
+    #list th,
+    #list td {
+        padding: 2px;
+        border: 1px solid black;        
+    }
+    
+    #loader {
+        background: #ddd;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        z-index: 99999;
+    }
+    
+    #loader div {
+        font-family: sans;
+        font-size: 8pt;
+        position: fixed;
+        text-align: center;
+        left: 50%;
+        top: 50%;
+        width: 20em;
+        height: 40px;
+        margin: -20px auto auto -10em;
+    }
+    
+    #actions,
+    #settings,
+    #audio_player,
+    #video_player, {
+        display: none;
+    }
+    
+    #audio_player,
+    #video_player {
+        margin: 0;
+        padding: 0;
+        width: 250px;
+    }
+    
+    #actions .audio,
+    #actions .video {
+        display: none;
+    }
+    
+    </style>
+    
+    
+</head>
+
+<body>
+
+    <audio id="audio_player" style="display:none;"></audio>
+    
+    <div id="settings" style="display:none;">
+        <div class="peer section">
+            <h1 class="i18n">Peer settings</h1>
+            <p>
+                <label for="setting_peer_name" class="i18n">Peer name:</label>
+                <input type="text" id="setting_peer_name"/>
+            </p>
+            
+            <p>
+                <input type="checkbox" id="enable_recursive_wget"/>
+                <label for="enable_recursive_wget" class="i18n">Recursive wget</label>
+            </p>
+            
+            <h1 class="i18n">Playback</h1>
+            <p>
+                <input type="checkbox" id="enable_html5_audio_player"/>
+                <label for="enable_html5_audio_player" title="Enable HTML5 audio player" class="i18n">Enable HTML5 audio player</label>
+            </p>
+            
+
+
+            <p>
+                <input type="checkbox" id="enable_html5_video_player"/>
+                <label for="enable_html5_video_player" title="Enable HTML5 video player" class="i18n">Enable HTML5 video player</label>
+            </p>
+            
+            <h1 class="i18n">My cloud</h1>
+
+            <p>
+                <input type="checkbox" id="enable_advertise_location"/>
+                <label for="enable_advertise_location" title="Avertise currently opened URL in the cloud" class="i18n">Advertise location</label>
+            </p>
+            
+            <p>
+                <input type="checkbox" id="enable_advertise_audio_playback"/>
+                <label for="enable_advertise_audio_playback" title="Advertise HTML5 audio playback capability" class="i18n">Advertise audio playback</label>
+            </p>
+
+            <p>
+                <input type="checkbox" id="enable_advertise_video_playback"/>
+                <label for="enable_advertise_video_playback" title="Advertise HTML5 video playback capability" class="i18n">Advertise video playback</label>
+            </p>
+
+            <p>
+                <input type="checkbox" id="enable_advertise_slideshow_capability"/>
+                <label for="enable_advertise_slideshow_capability" class="i18n">Advertise slideshow capability</label>
+            </p>
+
+
+            <h1 class="i18n">Play in VLC</h1>
+         
+            <p>
+                <input type="checkbox" id="enable_audio_xspf_playlist_link"/>
+                <label for="enable_audio_xspf_playlist_link" class="i18n">Enable audio XSPF link</label>
+            </p>
+
+            <p>
+                <input type="checkbox" id="enable_video_xspf_playlist_link"/>
+                <label for="enable_video_xspf_playlist_link" class="i18n">Enable video XSPF link</label>
+            </p>
+            
+
+            
+        </div>
+        
+        <div class="about section">
+            <h1 class="i18n">About</h1>
+            <a target="blank" href="https://bitbucket.org/lauri.vosandi/even-fancier-index/">MoarCloud</a>
+            by <a href="mailto:lauri.vosandi@gmail.com">Lauri Võsandi</a>.
+            Released under <a target="blank" href="http://www.gnu.org/licenses/agpl-3.0.html">AGPLv3</a>.
+        </div>
+    </div>
+
+
+    <div id="actions">
+        <div class="directory section">
+            <h1 class="i18n">Directory details</h1>
+            
+            <p class="action play audio" style="display:none;"><a class="i18n">Play audio tracks in browser</a></p>
+            <p class="action watch video" style="display:none;"><a class="i18n">Watch videos in browser</a></p>
+            <p class="action xspf audio" style="display:none;"><a class="i18n">Play audio tracks in VLC</a></p>
+            <p class="action xspf video" style="display:none;"><a class="i18n">Watch videos in VLC</a></p>
+            <p class="action wget recurse i18n" style="display:none;">Download using wget</p>
+            <p class="action toggle settings"><a class="i18n">Toggle settings</a></p>
+            <p class="directory_count"></p>
+            <p class="file_count"></p>
+            <div id="location"></div>
+        </div>
+        <div class="file section" style="display:none;">
+            <h1 class="i18n">File details</h1>
+            <p class="action download"><a class="i18n">Download</a></p>
+            <p class="mimetype"></p>
+            <p class="size"></p>
+        </div>
+        
+        <div class="video section">
+            <h1 class="i18n">Video details</h1>
+            <div class="screens">
+            </div>
+
+            <p class="duration">00:00:00</p>
+            <p class="codec">?</p>
+            <p class="resolution">?</p>
+            <video id="video_player" controls>Your browser does not support HTML5 video</video>
+        </div>
+        
+    </div>
+    
+    <div id="audio_player_controls">
+        <div class="buttons">
+            <button class="action previous"></button
+            ><button class="action play"></button
+            ><button class="action pause" style="display:none;"></button
+            ><button class="action stop"></button
+            ><button class="action next"></button>
+          
+        </div>
+
+        <div class="top">
+            <span class="title"></span>            
+            <span class="codec"></span>
+        </div>
+        
+        <div class="remainder">
+
+            
+            <span class="offset">00:00:00</span>
+            <span class="seek"><input type="range" min="0" max="100"/></span>
+            <span class="duration">00:00:00</span>
+
+        </div>
+    </div>
+
+
+
+    <div id="loader">
+        <div>
+            <p>Enhancing directory listing...</p>
+            <img src="/even-fancier-index/img/ajax-loader.gif"/>
+        </div>
+    </div>
+
+
+    <nav id="breadcrumbs"></nav>
+    
+    <div id="directories">
+        <h1 class="i18n">Directories</h1>
+        <div class="items"></div>
+    </div>
+    <div id="gallery">
+        <h1 class="i18n">Photos and images</h1>
+        <div class="items"></div>
+    </div>
+    <div id="videos">
+        <h1 class="i18n">Videos</h1>
+        <div class="items"></div>
+    </div>
+    
+    <div id="tracks">
+        <h1 class="i18n">Audio tracks</h1>
+        <div class="items"></div>
+    </div>
+    
+    <div id="otherFiles">
+        <h1 class="i18n">Other files</h1>
+        <div class="items"></div>
+    </div>
+    
+    <h1 style="display: none;">
+
