@@ -1,6 +1,14 @@
 # Even fancier index
 Some HTML/CSS/JS for building nice looking nginx fancyindex.
-[See it in action](http://mirror.igorpecovnik.com/)
+[See it in action](http://lauri.vosandi.com/8bp/)
+
+##Features
+
+* Dynamic breadcrumb generator
+* Image preview with [fancybox](http://fancybox.net/)
+* Preliminary SVG support in thumbnail view
+* XSPF playlist generator for playing audio and video using VLC
+* Preliminary in-browser playback for browser-supported formats
 
 ##Install
 
