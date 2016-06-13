@@ -34,5 +34,6 @@ window.l10n.merge({
         "Photos and images": "Fotod ja pildid",
         "Other files": "Muud failid",
         "About": "Rakendusest",
+        " bytes": " baiti",
     },
 })

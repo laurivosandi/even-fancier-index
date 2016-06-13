@@ -1,1 +1,1 @@
-window.THEMES = ["nouveGnomeGray", "nouveGnome"]
+window.THEMES = ["Humanity"]

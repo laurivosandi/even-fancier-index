@@ -43,20 +43,15 @@ function playAudioTrack(dom, autoplay) {
     
     $("#audio_player_controls .seek input").attr("max", duration);
 
-    url = url.replace("&", "%26").replace("+", "%2b");
-
-    console.info("############### NOW PLAYING:" + url);
-
     if (window.AUDIO_CODECS_SUPPORTED.indexOf(mimetype) >= 0) {
         player.append("<source src=\"" + url + "\" type=\"" + mimetype + "\"/>");
     }
-
+    
+    
     for (var j = 0; j < window.AUDIO_CODECS_SUPPORTED.length; j++) {
         var alternative = window.AUDIO_CODECS_SUPPORTED[j];
         if (mimetype != alternative) {
-//            player.append("<source src=\"/transcode/?mimetype=" + alternative + "&url=" + url.replace("&", "%26") + "\" type=\"" + alternative + "\"/>");
-            player.append("<source src=\"/transcode/?mimetype=" + alternative + "&url=" + url + "\" type=\"" + alternative + "\"/>");
-//            player.append("<source src=\"/transcode/?mimetype=" + alternative + "&url=" + encodeURIComponent(url) + "\" type=\"" + alternative + "\"/>");
+            player.append("<source src=\"/transcode/?mimetype=" + alternative + "&url=" + url.replace("&", "%26") + "\" type=\"" + alternative + "\"/>");
         }
     }
 

@@ -1,6 +1,5 @@
 @import "/even-fancier-index/fonts/droid-sans.css";
 
-
 footer {
     clear: both;
 }
@@ -120,7 +119,6 @@ h1 {
     text-overflow: ellipsis;
     padding-left: 54px;
     display: block;
-    cursor: inherit;
     white-space: nowrap;
     overflow: hidden;
     border: 1px solid transparent;
@@ -136,7 +134,7 @@ h1 {
 
 
 #directories .directory {
-    background-image: url('/even-fancier-index/themes/nouveGnome/48x48/places/folder.png');
+    background-image: url('/even-fancier-index/themes/Humanity/places/32/folder.svg');
 }
 
 .thumbnail {
@@ -223,49 +221,49 @@ h1 {
 */
 
 .action.xspf {
-    background-image: url("/even-fancier-index/themes/nouveGnome/24x24/apps/vlc.png");
+    background-image: url("/even-fancier-index/themes/Humanity/apps/24/vlc.png"); /* 24 */
 }
 
 .action.play.audio,
 .action.watch.video {
-    background-image: url("/even-fancier-index/themes/nouveGnome/24x24/actions/media-playback-start.png");
+    background-image: url("/even-fancier-index/themes/Humanity/actions/24/media-playback-start.svg"); /* 24 */
 }
 
 button.play {
-    background-image: url("/even-fancier-index/themes/nouveGnome/32x32/actions/media-playback-start.png");
+    background-image: url("/even-fancier-index/themes/Humanity/actions/24/media-playback-start.svg"); /* 32 */
 }
 
 button.pause {
-    background-image: url("/even-fancier-index/themes/nouveGnome/32x32/actions/media-playback-pause.png");
+    background-image: url("/even-fancier-index/themes/Humanity/actions/24/media-playback-pause.svg");
 }
 
 button.stop {
-    background-image: url("/even-fancier-index/themes/nouveGnome/32x32/actions/media-playback-stop.png");
+    background-image: url("/even-fancier-index/themes/Humanity/actions/24/media-playback-stop.svg");
 }
 
 button.previous {
-    background-image: url("/even-fancier-index/themes/nouveGnome/32x32/actions/media-skip-backward.png");
+    background-image: url("/even-fancier-index/themes/Humanity/actions/24/media-skip-backward.svg");
 }
 
 
 button.next {
-    background-image: url("/even-fancier-index/themes/nouveGnome/32x32/actions/media-skip-forward.png");
+    background-image: url("/even-fancier-index/themes/Humanity/actions/24/media-skip-forward.svg");
 }
 
 
 
 
 .action.wget, .action.download {
-    background-image: url("/even-fancier-index/themes/nouveGnome/24x24/places/folder-download.png");
+    background-image: url("/even-fancier-index/themes/Humanity/places/24/folder-download.svg");
 }
 
 
 .action.screen {
-    background-image: url("/even-fancier-index/themes/nouveGnome/24x24/devices/display.png");
+    background-image: url("/even-fancier-index/themes/Humanity/devices/32/display.svg");
 }
 
 .action.toggle.settings {
-    background-image: url("/even-fancier-index/themes/nouveGnome/24x24/categories/gnome-settings.png");
+    background-image: url("/even-fancier-index/themes/Humanity/categories/32/gnome-settings.svg");
 }
 
 
@@ -281,7 +279,7 @@ button.next {
     text-overflow: ellipsis;
     max-width: 15em;
     display: block;
-    cursor: inherit;
+    cursor: pointer;
     line-height: 100%;
 }
 
@@ -387,7 +385,7 @@ button.next {
     border-radius: 0 4px 4px 0;
 }
 
-.busy {
-    cursor: wait !important;
+html.busy, html.busy * {
+    cursor: wait;
 }
 

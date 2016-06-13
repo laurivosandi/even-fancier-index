@@ -43,24 +43,25 @@
     max-width: 15em;
     cursor: inherit;
     text-decoration: none;
+    cursor: pointer;
 }
 
 
 
 #breadcrumbs .root {
-    background-image: url('/even-fancier-index/themes/nouveGnome/24x24/places/gnome-fs-server.png');
+    background-image: url('/even-fancier-index/themes/Humanity/places/24/gnome-fs-server.svg');
 }
 
 #breadcrumbs .page {
-    background-image: url('/even-fancier-index/themes/nouveGnome/24x24/mimetypes/text-html.png');
+    background-image: url('/even-fancier-index/themes/Humanity/mimes/24/text-html.svg');
 }
 
 #breadcrumbs .directory {
-    background-image: url('/even-fancier-index/themes/nouveGnome/24x24/places/folder.png');
+    background-image: url('/even-fancier-index/themes/Humanity/places/24/folder.svg');
 }
 
 #breadcrumbs .directory.home {
-    background-image: url('/even-fancier-index/themes/nouveGnome/24x24/places/user-home.png');
+    background-image: url('/even-fancier-index/themes/Humanity/places/24/user-home.svg');
 }
 
 #location {

@@ -20,12 +20,13 @@ window.l10n = {
             source_string = source_string.substring(0, source_string.length-1);
         }
         
-        if (window.l10n.language && window.l10n.language != "en") {
+        if (window.l10n.language && window.l10n.language != "en" && window.l10n.translations[window.l10n.language] && window.l10n.translations[window.l10n.language][source_string]) {
             translated_string = window.l10n.translations[window.l10n.language][source_string];
         }
         if (append_colon) {
             translated_string += ":";
         }
+
         return translated_string;
     }
 };
@@ -36,7 +37,9 @@ $(document).ready(function() {
     var language_code = navigator.language;
     if (language_code.indexOf("-") >= 0) {
         language_code = language_code.substring(0, language_code.indexOf("-"));
+
     }
+
     window.l10n.language = language_code;
     console.info("Locale language:", window.l10n.language);
     $(".i18n").each(function() {

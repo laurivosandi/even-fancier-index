@@ -21,7 +21,7 @@ function humanize(size) {
     } else if (size > 1024) {
         return Math.round(size / 102.4) / 10.0 + " kB"
     } else {
-        return size + " bytes"
+        return size + _(" bytes")
     }
     
 }

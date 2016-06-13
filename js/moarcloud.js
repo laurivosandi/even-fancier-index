@@ -13,25 +13,27 @@ BYTECODE_EXTENSIONS = [".pyc", ".pyo" ];
 
 IGNORE_FILENAMES = [ "robots.txt", "index.xspf", "index.m3u", "index.m3u8", "index.html", "index.htm", "Picasa.ini", "Thumbs.db", "desktop.ini", "AlbumArtSmall.jpg", "__MACOSX/"];
 
-
 function createBreadcrumbs(path) {
-
+    // Decode punycoded hostnames
+    var hostname = window.location.host.split(".").map(function(c) {return c.indexOf("xn--") == 0 ? punycode.decode(c.substring(4)) : c}).join(".");
+    
     window.PATH = decodeURIComponent(path || window.location.pathname);
     window.PATH_COMPONENTS = window.location.pathname == "/" ? [] : window.PATH.replace(/^\/+|\/+$/g, '').split("/");
     
-    $("#location").empty();
-    $("#location").qrcode({ render: 'canvas', color: "#888", text: window.location.href});
+    //$("#location").empty();
+    //$("#location").qrcode({ render: 'canvas', color: "#888", text: window.location.href});
 
 
     /* Generate navigation bar on the fly */
     var $nav = $("#breadcrumbs");
     $nav.empty();
-    $nav.prepend("<a class=\"root\" href=\"" + window.location.origin + "\">" + window.location.host + "</a>");
+    $nav.prepend("<a class=\"root\" href=\"" + window.location.origin + "\">" + hostname + "</a>");
+
     var title = null;
     var hadHome = false; // Whether we already included home folder in the breadcrumbs
     for (var j = 0; j < window.PATH_COMPONENTS.length; j++) {
         title = window.PATH_COMPONENTS[j];
-        var url = encodeURI("/" + window.PATH_COMPONENTS.slice(0, j+1).join("/") + "/"); /* .replace("&", "%26"); */
+        var url = encodeURI("/" + window.PATH_COMPONENTS.slice(0, j+1).join("/") + "/");
         
         if (!hadHome && title[0] == '~') {
             $nav.append("<a class=\"directory item home\" href=\"" + url + "\">" + title.substring(1) + "</a>");
@@ -44,7 +46,6 @@ function createBreadcrumbs(path) {
     if (title) {
         $("head").append("<title>" + title + " at " + window.location.hostname + "</title>");
     }
-    window.title = title;
 
 }
 
@@ -78,13 +79,11 @@ function enhance(path) {
     var totalSize = 0;   
     var directoryCount = 0;
     var fileCount = 0;
-
-
     
     console.log("Original table contained", $items.length, "items");
 
     for (var j = 1; j < $items.length; j++) {
-        var url = $items[j].firstChild.firstChild.getAttribute("href").replace("&", "%26");
+        var url = $items[j].firstChild.firstChild.getAttribute("href");
         var filename = decodeURIComponent(url);
         var size = $items[j].childNodes[1].innerHTML.trim();
         var date = new Date($items[j].lastChild.innerHTML);
@@ -100,7 +99,7 @@ function enhance(path) {
 
         var extension = filename.substring(basename.length).toLowerCase();
         var mimetype = MIMETYPES[extension];
-        var icon = "/moarcloud/themes/" + window.CURRENT_THEME + "/48x48/mimetypes/" + (mimetype ? mimetype.replace("/", "-") : "application-octet-stream") + ".png";
+        var icon = "/even-fancier-index/themes/Humanity/mimes/48/" + (mimetype ? mimetype.replace("/", "-") : "application-octet-stream") + ".svg";
         var RE_DELIMITERS = /[ \.\-\_]/;
         var sort_key = filename.toLowerCase().replace(RE_DELIMITERS, " ").trim();
         if (sort_key.indexOf("the") == 0) {
@@ -130,7 +129,7 @@ function enhance(path) {
         } else if (AUDIO_EXTENSIONS.indexOf(extension) >= 0) {
             // Audio files
             title = title.replace("_", " ");
-//            console.log("Audio file:", basename, "mimetype:", mimetype);
+            console.log("Audio file:", basename, "mimetype:", mimetype);
             $tracks.append("<a class=\"track\" data-title=\"" + title + "\" data-mimetype=\"" +mimetype + "\" data-filename=\"" + filename.replace("\"", "\\\"") + "\" title=\"" + basename + "\" rel=\"g\" href=\"" + url +"\" style=\"background-image: url('" + icon + "');\">" + title + "</a>");
 
         } else if (VIDEO_EXTENSIONS.indexOf(extension) >= 0) {
@@ -296,36 +295,30 @@ function enhance(path) {
 
 
     $("#actions .directory .action.wget.recurse").hide();
-    if ($("#enable_recursive_wget").prop("checked")) {
-        $("#actions .directory .action.wget.recurse").click(function(e) {
-            var level = window.PATH_COMPONENTS.length;
-            var cmd = "wget --no-check-certificate --cut-dirs=" + level + " -c -r -nH -np -R \"index.html*\" ";
-            if (window.PATH_COMPONENTS[1] != "Public") {
-                cmd += "--ask-password ";
-            }
-            alert(cmd + window.location);
-        }).show();
-    }
+    $("#actions .directory .action.wget.recurse").click(function(e) {
+        var level = window.PATH_COMPONENTS.length;
+        var cmd = "wget --no-check-certificate --cut-dirs=" + level + " -c -r -nH -np -R \"index.html*\" ";
+        if (window.PATH_COMPONENTS[1] != "Public") {
+            cmd += "--ask-password ";
+        }
+        alert(cmd + window.location);
+    }).show();
 
     if ($videos.children().size() == 0) {
         $("#videos").hide();
         console.info("No videos listed");
     } else {
         $("#videos").show();
-        if ($("#enable_html5_video_player").prop("checked")) {
-            console.info("Default video file action is now: watch in browser");
-            $("#actions .action.watch.video").show();
-            $("#actions .action.watch.video").click(function(e) {
-                playVideoFile($(".videos .thumbnail").first());
-            });
-        }
+        console.info("Default video file action is now: watch in browser");
+        $("#actions .action.watch.video").show();
+        $("#actions .action.watch.video").click(function(e) {
+            playVideoFile($(".videos .thumbnail").first());
+        });
 
         // Clicking on video
         $("#videos .thumbnail").click(function(e) {
         
-            if ($("#enable_html5_video_player").prop("checked")) {
-                playVideoFile($(this));
-            }
+            playVideoFile($(this));
 
             $("#actions .section.video").show();
             $("#actions .section.file").show();
@@ -393,25 +386,21 @@ function enhance(path) {
         
 
 
-        if ($("#enable_video_xspf_playlist_link").prop("checked")) {
-            var video_xspf = ".moar/" + encodeURIComponent(window.PATH_COMPONENTS[window.PATH_COMPONENTS.length-1]) + ".xspf";   
+        var video_xspf = ".moar/" + encodeURIComponent(window.PATH_COMPONENTS[window.PATH_COMPONENTS.length-1]) + ".xspf";   
 
-            $.ajax(video_xspf).done(function(data) {
-                console.info("Watch vides in VLC link provided via", video_xspf);
-                $("#actions .directory .action.video.xspf").show();
-                $("#actions .directory .action.video.xspf a").attr("href", video_xspf).show();
-            }).error(function(data) {
-                console.info("Failed to pull video playlist", video_xspf, " this means watch videos in VLC link is disabled");
-            });
-            
-            // Pull .moar/video.json which contains video metadata
-            window.VIDEO_METADATAS = {};
-            $.ajax(".moar/video.json").done(function(data) {
-                window.VIDEO_METADATAS = data;
-            });
-        } else {
-            console.info("Video XSPF link disabled by settings");
-        }
+        $.ajax(video_xspf).done(function(data) {
+            console.info("Watch vides in VLC link provided via", video_xspf);
+            $("#actions .directory .action.video.xspf").show();
+            $("#actions .directory .action.video.xspf a").attr("href", video_xspf).show();
+        }).error(function(data) {
+            console.info("Failed to pull video playlist", video_xspf, " this means watch videos in VLC link is disabled");
+        });
+        
+        // Pull .moar/video.json which contains video metadata
+        window.VIDEO_METADATAS = {};
+        $.ajax(".moar/video.json").done(function(data) {
+            window.VIDEO_METADATAS = data;
+        });
     }
     
     if ($tracks.children().size() == 0) {
@@ -420,14 +409,12 @@ function enhance(path) {
     } else {
         $("#tracks").show();
         
-        if ($("#enable_html5_audio_player").prop("checked")) {
-            console.info("Default audio track action is now: play in browser");
-            $(".track").click(function(e) {
-                e.preventDefault();
-                playAudioTrack($(this), true);
-            });
-            $("#actions .action.play.audio").show();
-        }
+        console.info("Default audio track action is now: play in browser");
+        $(".track").click(function(e) {
+            e.preventDefault();
+            playAudioTrack($(this), true);
+        });
+        $("#actions .action.play.audio").show();
         
 
         // Play audio tracks in browser -> show audio details
@@ -437,11 +424,6 @@ function enhance(path) {
 
         // Fetch audio XSPF playlist
         $.ajax("index.xspf").done(function(data) {
-            window.blah = data;
-
-
-            
-            
 
             var $trackMetadatas = $("playlist trackList track", data);
 
@@ -491,17 +473,9 @@ function enhance(path) {
                 }
             }
 
-            if ($("#enable_audio_xspf_playlist_link").prop("checked")) {
-                $("location", window.blah).each(function(index, e) {
-                    e.innerHTML = window.location.protocol + "//" + window.location.hostname + window.location.pathname + e.innerHTML;
-                });
-                
-                var blob = new Blob([data.documentElement.outerHTML], {type: "octet/stream"})
-                $("#actions .directory .action.xspf.audio").show();
-                $("#actions .directory .action.xspf.audio a")
-                    .attr("href", window.URL.createObjectURL(blob))
-                    .attr("download", window.title + ".xspf")
-            }
+
+            $("#actions .directory .action.xspf.audio").show();
+            $("#actions .directory .action.xspf.audio a").attr("href", "index.xspf");
         });
     }
     
@@ -516,7 +490,7 @@ function enhance(path) {
     $(".directory.item").click(function(e) {
         e.preventDefault();
         
-        $("body").addClass("busy");
+        $("html").addClass("busy");
         
         var path = $(this).attr("href");
         if (path.substring(0,1) != "/") {
@@ -528,7 +502,7 @@ function enhance(path) {
 
         $("#list").load("//" + window.location.hostname + path + " #list", null, function() {
             enhance(path);
-            $("body").removeClass("busy");
+            $("html").removeClass("busy");
         });
     });
 
@@ -545,60 +519,6 @@ function fallback() {
     return;
 }
 
-function loadSettings() {
-    // Set up peer UUID
-    window.uuid = uuid4();
-    
-    var defaults = {
-        peer_name: "Lauri's browser",
-        enable_recursive_wget: false,
-        enable_html5_audio_player: true,
-        enable_html5_video_player: true,
-        enable_advertise_location: true,
-        enable_advertise_audio_playback: false,
-        enable_advertise_video_playback: false,
-        enable_advertise_slideshow_capability: false,
-        enable_audio_xspf_playlist_link: true,
-        enable_video_xspf_playlist_link: true
-    }
-    
-    for (var key in defaults) {
-        var value = localStorage.getItem(key);
-        if (!value) {
-            value = defaults[key];
-            console.log("Using default value:", value, "for setting:", key);
-        } else {
-            console.log("Using stored value:", value, "for setting:", key);
-        }
-        
-        if (key.indexOf("enable_") == 0) {
-            if (value == "true") { value = true; }
-            else if (value == "1") { value = true; }
-            else if (value == "false") { value = false; }
-            else if (value == "0") { value = false; }
-            
-            $("#" + key).prop("checked", value);
-            $("#" + key).change(function() {
-                localStorage.setItem(this.id, $(this).prop("checked"));
-            });    
-
-        } else {
-            $("#setting_" + key).val(value);
-            $("#setting_" + key).change(function() {
-                localStorage.setItem(this.id.substring(8), $(this).val());
-            });    
-
-        }
-        
-
-    }
-    
-    $("#actions .action.toggle.settings").click(function() {
-        $("#settings").toggle();
-    });
-
-}
-
 $(document).ready(function() {
     
     if (!window.localStorage) {
@@ -611,32 +531,8 @@ $(document).ready(function() {
     }
 
     window.CURRENT_THEME = window.THEMES[window.THEMES.length-1];
-    window.bus = new Bus("blah");
-    
-    window.bus.bind("pong", function() {
-        console.log("Acknowledged peer:", args.source, args.name, "with capabilities:", args.capabilities, "at", args.path);
-        var $screen = $("#actions .section.video .screens." + args.source);
-        console.log("screens:", $screen.size());
-        if (args.capabilities.indexOf("video_playback") >= 0) {
-            if ($screen.size() > 0) { return; }
-            for (var j = 0; j < args.screens.length; j++) {
-                $("#actions .section.video .screens").append("<p class=\"" + args.source + " action screen\" title=\"Enqueue on " + args.name + " (" + args.screens[j].width + "x" + args.screens[j].height + ")\">Enqueue on " + args.name + "</p>").click(function(e) {
-                    var href = $("#actions .section.file .action.download a").attr("href");
-                    self.emit({url: window.location + href, mimetype:"video/sumting", action:"enqueue"});
-                });
-            }
-        } else {
-            $screen.remove();
-        }
-    });
-    
 
-    window.bus.bind("leave", function() {    
-        console.log("Forgetting peer:", args.source);
-        $("." + args.source).remove();
-    });
     
-    loadSettings();
     probeCodecs();
     
     window.onpopstate = function(event) {
